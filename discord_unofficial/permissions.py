@@ -130,7 +130,7 @@ class Permissions:
     def all(cls):
         """A factory method that creates a :class:`Permissions` with all
         permissions set to True."""
-        return cls(0b01111111111101111111110011111111)
+        return cls(0b111111111111111111111111111111111)
 
     @classmethod
     def all_channel(cls):
@@ -145,25 +145,25 @@ class Permissions:
         - change_nicknames
         - manage_nicknames
         """
-        return cls(0b00110011111101111111110001010001)
+        return cls(0b000110011111101111111110001010001)
 
     @classmethod
     def general(cls):
         """A factory method that creates a :class:`Permissions` with all
         "General" permissions from the official Discord UI set to True."""
-        return cls(0b01111100000000000000000010111111)
+        return cls(0b001111100000010000000000010111111) # i'll assume view guild insights is part of this
 
     @classmethod
     def text(cls):
         """A factory method that creates a :class:`Permissions` with all
         "Text" permissions from the official Discord UI set to True."""
-        return cls(0b00000000000001111111110001000000)
+        return cls(0b010000000000001111111110001000000)
 
     @classmethod
     def voice(cls):
         """A factory method that creates a :class:`Permissions` with all
         "Voice" permissions from the official Discord UI set to True."""
-        return cls(0b00000011111100000000000000000000)
+        return cls(0b100000011111100000000001100000000) # same with request to speak
 
     def update(self, **kwargs):
         """Bulk updates this permission object.
