@@ -3,7 +3,10 @@
 """
 The MIT License (MIT)
 
-Copyright (c) 2015-2016 Rapptz
+Copyright (c) 2015-2020 Rapptz
+Copyright (c) 2020-2021 RandomGamer123
+
+Note: Copyright for portions of project discord.py are held by Rapptz. All other copyright for the project is held by RandomGamer123.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
@@ -287,6 +290,25 @@ class Permissions:
         self._set(7, value)
 
     # 2 unused
+    # Not unused anymore
+    
+    @property
+    def priority_speaker(self):
+        """Returns True if a user can use priority speaker."""
+        return self._bit(8)
+
+    @view_audit_logs.setter
+    def priority_speaker(self, value):
+        self._set(8, value)
+    
+    @property
+    def stream(self):
+        """Returns True if a user can stream."""
+        return self._bit(9)
+
+    @view_audit_logs.setter
+    def stream(self, value):
+        self._set(9, value)
 
     @property
     def read_messages(self):
@@ -370,7 +392,17 @@ class Permissions:
         self._set(18, value)
 
     # 1 unused
+    # not anymore
+    
+    @property
+    def view_guild_insights(self):
+        """Returns True if a user can view guild insights."""
+        return self._bit(19)
 
+    @external_emojis.setter
+    def view_guild_insights(self, value):
+        self._set(19, value)
+        
     @property
     def connect(self):
         """Returns True if a user can connect to a voice channel."""
@@ -476,6 +508,27 @@ class Permissions:
     # 1 unused
 
     # after these 32 bits, there's 21 more unused ones technically
+    
+    # 5 new permissions things (only 2 implemented)
+    
+    @property
+    def use_slash_commands(self):
+        """Returns True if a user can use slash commands."""
+        return self._bit(31)
+
+    @manage_emojis.setter
+    def use_slash_commands(self, value):
+        self._set(31, value)
+        
+    @property
+    def request_to_speak(self):
+        """Returns True if a user can request to speak in a stage channel (useless for now)."""
+        return self._bit(32)
+
+    @manage_emojis.setter
+    def request_to_speak(self, value):
+        self._set(32, value)
+   
 
 def augment_from_permissions(cls):
     cls.VALID_NAMES = { name for name in dir(Permissions) if isinstance(getattr(Permissions, name), property) }
